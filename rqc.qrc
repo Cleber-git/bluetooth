@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>OIP.jpeg</file>
+        <file>refresh-512.webp</file>
+    </qresource>
+</RCC>
