@@ -1,6 +1,8 @@
 #ifndef SCREENOFCONNECT_H
 #define SCREENOFCONNECT_H
 
+#include <QBluetoothDeviceInfo>
+#include <QBluetoothDeviceDiscoveryAgent>
 #include <QWidget>
 #include <QString>
 #include <QDebug>
@@ -20,16 +22,20 @@ public:
 
     void retrievingInfo();
 
+    void refresh();
+
+    void startDeviceDiscovery();
 private slots:
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
 
-    void refresh();
-
+public slots:
+    void deviceDiscovered(const QBluetoothDeviceInfo &device);
 private:
     Ui::screenOfConnect *ui;
     QString m_nameDevice;
+    QBluetoothDeviceDiscoveryAgent *m_discoveryAgent;
 };
 
 #endif // SCREENOFCONNECT_H
