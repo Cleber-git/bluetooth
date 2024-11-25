@@ -344,6 +344,7 @@ Makefile: ..\..\bluetooth.pro C:\Qt\6.7.2\msvc2019_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\6.7.2\msvc2019_64\mkspecs\features\yacc.prf \
 		C:\Qt\6.7.2\msvc2019_64\mkspecs\features\lex.prf \
 		..\..\bluetooth.pro \
+		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Multimedia.prl \
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgets.prl \
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Gui.prl \
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Bluetooth.prl \
@@ -352,6 +353,7 @@ Makefile: ..\..\bluetooth.pro C:\Qt\6.7.2\msvc2019_64\mkspecs\win32-msvc\qmake.c
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6EntryPoint.prl \
 		C:\Qt\6.7.2\msvc2019_64\mkspecs\features\build_pass.prf \
 		..\..\rqc.qrc \
+		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Multimediad.prl \
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgetsd.prl \
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Guid.prl \
 		C:\Qt\6.7.2\msvc2019_64\lib\Qt6Bluetoothd.prl \
@@ -619,6 +621,7 @@ C:\Qt\6.7.2\msvc2019_64\mkspecs\features\exceptions.prf:
 C:\Qt\6.7.2\msvc2019_64\mkspecs\features\yacc.prf:
 C:\Qt\6.7.2\msvc2019_64\mkspecs\features\lex.prf:
 ..\..\bluetooth.pro:
+C:\Qt\6.7.2\msvc2019_64\lib\Qt6Multimedia.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgets.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6Gui.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6Bluetooth.prl:
@@ -627,6 +630,7 @@ C:\Qt\6.7.2\msvc2019_64\lib\Qt6Core.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6EntryPoint.prl:
 C:\Qt\6.7.2\msvc2019_64\mkspecs\features\build_pass.prf:
 ..\..\rqc.qrc:
+C:\Qt\6.7.2\msvc2019_64\lib\Qt6Multimediad.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgetsd.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6Guid.prl:
 C:\Qt\6.7.2\msvc2019_64\lib\Qt6Bluetoothd.prl:

@@ -32,7 +32,7 @@ public:
     {
         if (screenOfConnect->objectName().isEmpty())
             screenOfConnect->setObjectName("screenOfConnect");
-        screenOfConnect->resize(383, 547);
+        screenOfConnect->resize(383, 447);
         screenOfConnect->setStyleSheet(QString::fromUtf8("background-color: rgb(59, 59, 59);"));
         cmb_connectado = new QComboBox(screenOfConnect);
         cmb_connectado->setObjectName("cmb_connectado");
@@ -51,9 +51,9 @@ public:
         label_2->setGeometry(QRect(169, 115, 51, 20));
         pushButton_2 = new QPushButton(screenOfConnect);
         pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(360, 113, 20, 21));
-        pushButton_2->setStyleSheet(QString::fromUtf8("border-image: url(:/img/refresh-512.webp);\n"
-"background-color: rgb(134, 134, 134);"));
+        pushButton_2->setGeometry(QRect(355, 115, 15, 15));
+        pushButton_2->setStyleSheet(QString::fromUtf8("border-image: url(:/img/refresh1.png) ;\n"
+"background: rgb(255, 255, 255);"));
 
         retranslateUi(screenOfConnect);
 

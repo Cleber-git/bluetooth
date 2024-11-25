@@ -4,6 +4,9 @@
 #include <QBluetoothLocalDevice>
 #include <QBluetoothAddress>
 #include <QBluetoothPermission>
+#include <QByteArray>
+#include <QLowEnergyController>
+#include <QLoggingCategory>
 
 screenOfConnect::screenOfConnect(QWidget *parent)
     : QWidget(parent)
@@ -15,7 +18,9 @@ screenOfConnect::screenOfConnect(QWidget *parent)
     m_discoveryAgent = new QBluetoothDeviceDiscoveryAgent(this);
     connect(m_discoveryAgent, SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
             this, SLOT(deviceDiscovered(QBluetoothDeviceInfo)));
-
+    QLoggingCategory::setFilterRules(QStringLiteral("qt.bluetooth.*=true"));
+    ui->cmb_proximos->hide();
+    ui->label_2->hide();
 }
 
 screenOfConnect::~screenOfConnect()
@@ -28,11 +33,13 @@ void screenOfConnect::retrievingInfo(){
     QBluetoothLocalDevice localDevice;
 
     // verificar se existe algum
-   //  serviço de bluetooth
-    // disponível no dispositivo
+   // serviço de bluetooth
+  // disponível no dispositivo
+
     qDebug() << localDevice.name();
 
     if(localDevice.isValid()){
+
         // Habilitar o Bluetooth
         localDevice.powerOn();
 
@@ -41,17 +48,30 @@ void screenOfConnect::retrievingInfo(){
         // tornando-o visível para os outros dispositivos
         localDevice.setHostMode(QBluetoothLocalDevice::HostDiscoverable);
 
-        // obter lista de dispositivos próximos
+        // Mostrar qual item está atualmente conectado
         QList<QBluetoothAddress> remotes;
         remotes = localDevice.connectedDevices();
         for(auto bConnected : remotes){
-            ui->cmb_connectado->addItem(bConnected.toString());
+            ui->cmb_connectado->addItem( m_nameDevice );
         }
     }
 }
 
 void screenOfConnect::on_pushButton_clicked(){
-    retrievingInfo();
+    QByteArray data = QByteArray::fromStdString(ui->lineEdit->text().toStdString());
+    qDebug() << data;
+
+    m_socket->write(data);
+    // m_socket.flush();
+
+    QObject::connect(m_socket, &QBluetoothSocket::readyRead, [&]() {
+        qDebug() << "Received response";
+    });
+    QLowEnergyController *controller;
+    controller->discoverServices();
+    QObject::connect(controller, &QLowEnergyController::serviceDiscovered, [](const QBluetoothUuid &uuid) {
+        qDebug() << "Serviço disponível:" << uuid.toString();
+    });
 }
 
 void screenOfConnect::on_pushButton_2_clicked(){
@@ -64,8 +84,11 @@ void screenOfConnect::refresh(){
 
 void screenOfConnect::deviceDiscovered(const QBluetoothDeviceInfo &device)
 {
-    qDebug() << "Found new device:" << device.name() << '(' << device.address().toString() << ')';
     if(ui->cmb_proximos->findText(device.name()) == -1){
+        qDebug() << "Found new device:" << device.name() << '(' << device.address().toString() << ')';
+
+        m_listDevices[device.name()] = device.address().toString();
+        ui->listWidget->addItem( device.name());
         ui->cmb_proximos->addItem(device.name());
         return;
     }
@@ -74,9 +97,28 @@ void screenOfConnect::deviceDiscovered(const QBluetoothDeviceInfo &device)
 }
 
 void screenOfConnect::startDeviceDiscovery(){
-
-
     // Start a discovery
     m_discoveryAgent->start();
 
 }
+
+void screenOfConnect::on_cmb_proximos_currentTextChanged(const QString &arg1)
+{
+
+}
+
+void screenOfConnect::on_listWidget_itemClicked(QListWidgetItem *item)
+{
+
+    m_socket->disconnectFromService();
+    m_nameDevice = item->text();
+    QString add = m_listDevices[m_nameDevice];
+    qDebug() << add;
+    QBluetoothAddress address(add);
+    m_socket->connectToService(address, 1);
+
+    connect(m_socket, &QBluetoothSocket::connected, this, &screenOfConnect::retrievingInfo);
+    disconnect(m_discoveryAgent, SIGNAL(deviceDiscovered(QBluetoothDeviceInfo)),
+               this, SLOT(deviceDiscovered(QBluetoothDeviceInfo)));
+}
+

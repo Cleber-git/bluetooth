@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/img">
         <file>OIP.jpeg</file>
-        <file>refresh-512.webp</file>
+        <file>refresh.png</file>
+        <file>refresh1.png</file>
     </qresource>
 </RCC>

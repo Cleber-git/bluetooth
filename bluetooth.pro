@@ -1,5 +1,4 @@
-QT       += core gui bluetooth
-
+QT       += core gui bluetooth multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    permissions.cpp \
     screenofconnect.cpp
 
 HEADERS += \
     mainwindow.h \
-    screenofconnect.h
+    permissions.h \
+    screenofconnect.h \
 
 FORMS += \
     mainwindow.ui \

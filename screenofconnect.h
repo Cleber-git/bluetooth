@@ -6,6 +6,9 @@
 #include <QWidget>
 #include <QString>
 #include <QDebug>
+#include <QMap>
+#include <QListWidgetItem>
+#include <QBluetoothSocket>
 
 
 namespace Ui {
@@ -20,8 +23,6 @@ public:
     explicit screenOfConnect(QWidget *parent = nullptr);
     ~screenOfConnect();
 
-    void retrievingInfo();
-
     void refresh();
 
     void startDeviceDiscovery();
@@ -30,12 +31,21 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_cmb_proximos_currentTextChanged(const QString &arg1);
+
+
+
+    void on_listWidget_itemClicked(QListWidgetItem *item);
+
 public slots:
     void deviceDiscovered(const QBluetoothDeviceInfo &device);
+    void retrievingInfo();
 private:
     Ui::screenOfConnect *ui;
     QString m_nameDevice;
     QBluetoothDeviceDiscoveryAgent *m_discoveryAgent;
+    QMap<QString, QString> m_listDevices;
+    QBluetoothSocket *m_socket = new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol);
 };
 
 #endif // SCREENOFCONNECT_H
